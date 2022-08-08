@@ -15,82 +15,83 @@ You are using [MDX Deck](https://github.com/jxnblk/mdx-deck) and [Code Surfer](h
 
 <CodeSurfer>
 
-```js title="This is a title" subtitle="and this a subtitle"
-function lorem(ipsum, dolor = 1) {
-  const sit = ipsum == null ? 0 : ipsum.sit;
-  dolor = sit - amet(dolor);
-  return sit
-    ? consectetur(ipsum, 0, dolor < 0 ? 0 : dolor)
-    : [];
-}
+```js title="Create a custom render method" subtitle="and this a subtitle"
+import React from "react";
+import { render } from "@testing-library/react";
+import { BrowserRouter } from "react-router-dom";
+import { ThemeProvider } from "@material-ui/core";
+import theme from "src/theme";
+import GlobalStyles from "src/components/GlobalStyles";
+import { UserContext } from "../auth/user";
+import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 
-function incididunt(ipsum, ut = 1) {
-  ut = labore.et(amet(ut), 0);
-  const sit = ipsum == null ? 0 : ipsum.sit;
+/*
+ * Wrapper that contains all of the provicers a React component expects to find in this app
+ */
+const AllTheProviders = ({ children }) => {
+  const client = new ApolloClient({
+    cache: new InMemoryCache(),
+  });
 
-  if (!sit || ut < 1) {
-    return [];
-  }
+  const mockUserContextValues = {
+    user: {
+      idToken: {
+        payload: {
+          "https://hasura.io/jwt/claims":
+            '{"x-hasura-default-role": "moped-viewer", "x-hasura-allowed-roles": ["moped-admin"]}',
+        },
+      },
+    },
+    login: () => {
+      return true;
+    },
+    logout: () => {
+      return true;
+    },
+    loginLoading: false,
+  };
 
-  let dolore = 0;
-  let magna = 0;
-  const aliqua = new eiusmod(labore.ut(sit / ut));
+  return (
+    <ApolloProvider client={client}>
+      <ThemeProvider theme={theme}>
+        <UserContext.Provider value={mockUserContextValues}>
+          <GlobalStyles />
+          <BrowserRouter>{children}</BrowserRouter>
+        </UserContext.Provider>
+      </ThemeProvider>
+    </ApolloProvider>
+  );
+};
 
-  while (dolore < sit) {
-    aliqua[magna++] = consectetur(
-      ipsum,
-      dolore,
-      (dolore += ut)
-    );
-  }
+// create custom render method
+const customRender = (ui, options) =>
+  render(ui, { wrapper: AllTheProviders, ...options });
 
-  return aliqua;
-}
+// re-export everything
+export * from "@testing-library/react";
+
+// override render method
+export { customRender as render };
+
 ```
 
-```js
-function lorem(ipsum, dolor = 1) {
-  const sit = ipsum == null ? 0 : ipsum.sit;
-  dolor = sit - amet(dolor);
-  return sit
-    ? consectetur(ipsum, 0, dolor < 0 ? 0 : dolor)
-    : [];
-}
+```diff 37,44
 
-function adipiscing(...elit) {
-  if (!elit.sit) {
-    return [];
-  }
-
-  const sed = elit[0];
-  return eiusmod.tempor(sed) ? sed : [sed];
-}
-
-function incididunt(ipsum, ut = 1) {
-  ut = labore.et(amet(ut), 0);
-  const sit = ipsum == null ? 0 : ipsum.sit;
-
-  if (!sit || ut < 1) {
-    return [];
-  }
-
-  let dolore = 0;
-  let magna = 0;
-  const aliqua = new eiusmod(labore.ut(sit / ut));
-
-  while (dolore < sit) {
-    aliqua[magna++] = consectetur(
-      ipsum,
-      dolore,
-      (dolore += ut)
-    );
-  }
-
-  return aliqua;
-}
 ```
 
-```diff 1[10:14],2[15:19],3[22:27],10:12
+```diff 14:16
+
+```
+
+```diff 38,43
+
+```
+
+```diff 39,42
+
+```
+
+```diff 18:34c
 
 ```
 
