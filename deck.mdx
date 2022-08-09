@@ -4,12 +4,27 @@ import {
   Step,
 } from "code-surfer";
 import { github, vsDark } from "@code-surfer/themes";
+import { Image } from "mdx-deck";
+import kentcdoddstweet from "./images/kentcdoddstweet.png";
+
 
 export const theme = vsDark;
 
-# Hello 👋
+# React Testing Library 🐙
 
-You are using [MDX Deck](https://github.com/jxnblk/mdx-deck) and [Code Surfer](https://codesurfer.pomb.us)
+## Discovery Day 8/5/2022
+
+---
+
+<Image src={kentcdoddstweet} style={{
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: 'white',
+    backgroundColor: 'black',
+    width: '1172px',
+    height: '344px'
+  }} />
 
 ---
 
@@ -26,7 +41,7 @@ import { UserContext } from "../auth/user";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 
 /*
- * Wrapper that contains all of the provicers a React component expects to find in this app
+ * Wrapper that contains all of the providers a React component expects to find in this app
  */
 const AllTheProviders = ({ children }) => {
   const client = new ApolloClient({
@@ -91,7 +106,7 @@ export { customRender as render };
 
 ```
 
-```diff 18:34c
+```diff 18:34
 
 ```
 
