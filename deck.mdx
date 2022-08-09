@@ -30,7 +30,7 @@ export const theme = vsDark;
 
 ## What is React Testing Library?
 
-- Open source project started by Kent C Dodds 💻
+- Open source project started by Kent C. Dodds 💻
 - https://github.com/testing-library/react-testing-library
 - Focuses on tests that mimic user interactions
 
@@ -58,7 +58,7 @@ export const theme = vsDark;
 2. Find the element to test
    - User searching UI for what they want to do
 3. Interact with the element 
-   - User interaction)
+   - User interaction
 4. Make an assertion about the element
    - Does this element do what we intend it to do?
 
@@ -155,11 +155,21 @@ export { customRender as render };
 <Step>
 
 ```js
-const magna = aliqua => aliqua.ut((enim, ad) => enim, 0);
+describe("NewStaffView", () => {
+  it("renders viewer role as selected by default", () => {
+    render(NewStaffForm);
+
+    const viewerRoleRadioElement = screen.getByLabelText("Viewer");
+
+    expect(viewerRoleRadioElement).toBeChecked("selected");
+  });
+});
 ```
 
-```js
-const minim = (ad, enim) => dolore.magna(ad / enim);
+```md
+This test makes sure that the form used
+to create a new Moped user defaults their 
+role to the lowest level of permissions.
 ```
 
 </Step>
@@ -167,31 +177,21 @@ const minim = (ad, enim) => dolore.magna(ad / enim);
 <Step>
 
 ```js
-const lorem = (ipsum, dolor, sit) => {
-  const amet = dolor - ipsum;
-  return consectetur.adipiscing(
-    {
-      elit: sed.eiusmod(sit - dolor) / amet + 2,
-    },
-    (tempor, incididunt) => ipsum + amet * incididunt
-  );
-};
+describe("NewStaffView", () => {
+  it("renders viewer role as selected by default", () => {
+    render(NewStaffForm);
 
-const magna = aliqua => aliqua.ut((enim, ad) => enim, 0);
+    const viewerRoleRadioElement = screen.getByLabelText("Viewer");
+
+    expect(viewerRoleRadioElement).toBeChecked("selected");
+  });
+});
 ```
 
-```js
-const minim = (ad, enim) => dolore.magna(ad / enim);
-
-const sed = (eiusmod, tempor, incididunt) => {
-  const ut = tempor - eiusmod;
-  return labore.et(
-    {
-      amet: dolore.magna(incididunt - tempor) / ut + 2,
-    },
-    (aliqua, elit) => eiusmod + ut * elit
-  );
-};
+```md
+At the end of the day, this test is a function. 
+If it runs successfully, the test passes. ✅
+If it throws an error, the test fails. ❌
 ```
 
 </Step>
@@ -204,12 +204,14 @@ const sed = (eiusmod, tempor, incididunt) => {
 
 - User focused 💙
 - Peel back the layers of the app 🧅
-
+- Methods to find elements focus on labels 👀
+- If that doesn't work, use data-testid attribute ✅
+- Debug mode helps visualize what the library sees 🔭
 
 ---
 
 # Hurdles
 
-- Customizing the `render` method to fit each app :
+- Customizing the `render` method takes some doing 🤔
 - Learning `jest-dom` for matchers 🧩
-- Getting a hang of the getting the right DOM node 🏄‍♂️
+- Getting a hang of the finding the right DOM node 🏄‍♂️
