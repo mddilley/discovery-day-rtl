@@ -28,22 +28,45 @@ export const theme = vsDark;
 
 ---
 
-What does React Testing Library allow us to do?
+## What is React Testing Library?
 
-
+- Open source project started by Kent C Dodds 💻
+- https://github.com/testing-library/react-testing-library
+- Focuses on tests that mimic user interactions
 
 ---
 
-What type of testing can we conduct?
+## Why test?
+
+- Gives us confidence in our apps 💪
+- Catch bugs before anyone else reviews our code 🐛
+- Tells the story of the code 📖
+- Speeds up QA ⏩
+
+---
+
+## What type of tests?
 
 - Unit testing - test one component 🧱
 - Integration test - test how components work together 🤝
 
 ---
 
+
+1. Render
+   - User experiencing the UI
+2. Find the element to test
+   - User searching UI for what they want to do
+3. Interact with the element 
+   - User interaction)
+4. Make an assertion about the element
+   - Does this element do what we intend it to do?
+
+---
+
 <CodeSurfer>
 
-```js title="Create a custom render method" subtitle="and this a subtitle"
+```js title="Setup for Moped Editor" subtitle="TLDR: Get pieces of the app to render"
 import React from "react";
 import { render } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
